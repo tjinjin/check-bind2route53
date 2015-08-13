@@ -2,6 +2,10 @@
 
 bindからroute53へ移行した際に設定が正しいかを検証するツール
 
+## Requirement
+* ruby
+* bash (>4)
+* voyagegroup/bind2route53
 
 ## Use
 * bind2route53をgit cloneする
