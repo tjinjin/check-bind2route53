@@ -11,7 +11,7 @@ bindからroute53へ移行した際に設定が正しいかを検証するツー
 * bind2route53をgit cloneする
 
 ```
-$ git@github.com:voyagegroup/bind2route53.git
+$ git clone git@github.com:voyagegroup/bind2route53.git
 $ cd bind2route53
 ```
 
@@ -40,3 +40,4 @@ domain: ExampleJp
 www.example.jp: success
 api.example.jp: fail
 ```
+successは青、failは赤で表示される
