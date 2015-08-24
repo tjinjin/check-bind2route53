@@ -21,6 +21,12 @@ $ cd bind2route53
 $ vim config/default.yml
 ```
 
+* zoneファイルのパスを追記する
+
+```
+zone_path=<absolute path>
+```
+
 * wgetでこのツールを落とす
 
 ```
