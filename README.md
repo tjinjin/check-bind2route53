@@ -24,7 +24,8 @@ $ vim config/default.yml
 * wgetでこのツールを落とす
 
 ```
-$ wget https://github.com/tjinjin/check-bind2route53/blob/master/check-bind2route53.sh
+$ wget https://raw.github.com/tjinjin/check-bind2route53/master/check-bind2route53.sh
+$ wget https://raw.github.com/tjinjin/check-bind2route53/master/check-route53tobind.sh
 ```
 
 * 実行する
@@ -41,3 +42,6 @@ www.example.jp: success
 api.example.jp: fail
 ```
 successは青、failは赤で表示される
+
+## Attention
+* check-route53tobind.shはRoute53に移行後にBINDのレコードを確認する用。念のため作った程度。
