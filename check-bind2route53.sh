@@ -6,8 +6,8 @@ domain=$(ruby -e "puts \"$target\".split('.').map(&:capitalize).join.gsub('-', '
 
 # path
 current=`pwd`
-project_path=$current/dig_check/$target
-result_path=$project_path/before_result
+project_path=$current/dig_check_before/$target
+result_path=$project_path/result
 zone_path=aaa
 
 ## function check
