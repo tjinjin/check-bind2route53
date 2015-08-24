@@ -7,7 +7,7 @@ domain=$(ruby -e "puts \"$target\".split('.').map(&:capitalize).join.gsub('-', '
 # path
 current=`pwd`
 project_path=$current/dig_check/$target
-result_path=$project_path/before_result
+result_path=$project_path/after_result
 zone_path=aaa
 
 ## function check
@@ -32,12 +32,12 @@ done
 echo "domain: $domain"
 
 if [ -z $target ] ;then
-  echo "example: ./check-bind2route53.sh [target domain] [NS]  ./check-bind2route53.sh example.jp @ns1.google.com"
+  echo "example: ./check-route53tobind.sh [target domain] [NS]  ./check-route53tobind.sh example.jp @ns1.bind.com"
   exit 1
 fi
 
 if [ -z $NS ] ;then
-  echo "example: ./check-bind2route53.sh [target domain] [NS]  ./check-bind2route53.sh example.jp @ns1.google.com"
+  echo "example: ./check-route53tobind.sh [target domain] [NS]  ./check-route53tobind.sh example.jp @ns1.bind.com"
   exit 1
 fi
 
@@ -49,8 +49,8 @@ fi
 mkdir -p $result_path
 
 # meta
-echo "bundle exec bin/convert_zonefile -z $target.  -f $zone_path/$target.zone  | jq -r '.Resources.R53${domain}.Properties.RecordSets[]|\"dig +short \\(.Type)  \\(.Name) > $result_path/\\(.Name)bind\"' > $project_path/$target.bind.zone" >$project_path/test-$target-bind.sh
-echo "bundle exec bin/convert_zonefile -z $target.  -f $zone_path/$target.zone  | jq -r '.Resources.R53${domain}.Properties.RecordSets[]|\"dig +short \\(.Type)  \\(.Name) ${NS}  > $result_path/\\(.Name)route53\"' > $project_path/$target.route53.zone" >$project_path/test-$target-route53.sh
+echo "bundle exec bin/convert_zonefile -z $target.  -f $zone_path/$target.zone  | jq -r '.Resources.R53${domain}.Properties.RecordSets[]|\"dig +short \\(.Type)  \\(.Name) ${NS}> $result_path/\\(.Name)bind\"' > $project_path/$target.bind.zone" >$project_path/test-$target-bind.sh
+echo "bundle exec bin/convert_zonefile -z $target.  -f $zone_path/$target.zone  | jq -r '.Resources.R53${domain}.Properties.RecordSets[]|\"dig +short \\(.Type)  \\(.Name)  > $result_path/\\(.Name)route53\"' > $project_path/$target.route53.zone" >$project_path/test-$target-route53.sh
 
 
 sh $project_path/test-$target-bind.sh
