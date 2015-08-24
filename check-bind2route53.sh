@@ -7,7 +7,7 @@ domain=$(ruby -e "puts \"$target\".split('.').map(&:capitalize).join.gsub('-', '
 # path
 current=`pwd`
 project_path=$current/dig_check/$target
-result_path=$project_path/result
+result_path=$project_path/before_result
 zone_path=aaa
 
 ## function check
@@ -46,7 +46,7 @@ if [ -e $project_path ] ;then
   exit 1
 fi
 
-mkdir -p $project_path/result
+mkdir -p $result_path
 
 # meta
 echo "bundle exec bin/convert_zonefile -z $target.  -f $zone_path/$target.zone  | jq -r '.Resources.R53${domain}.Properties.RecordSets[]|\"dig +short \\(.Type)  \\(.Name) > $result_path/\\(.Name)bind\"' > $project_path/$target.bind.zone" >$project_path/test-$target-bind.sh
