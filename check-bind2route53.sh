@@ -49,8 +49,8 @@ fi
 mkdir -p $result_path
 
 # meta
-echo "bundle exec bin/convert_zonefile -z $target.  -f $zone_path/$target.zone  | jq -r '.Resources.R53${domain}.Properties.RecordSets[]|\"dig +short \\(.Type)  \\(.Name) > $result_path/\\(.Name)bind\"' > $project_path/$target.bind.zone" >$project_path/test-$target-bind.sh
-echo "bundle exec bin/convert_zonefile -z $target.  -f $zone_path/$target.zone  | jq -r '.Resources.R53${domain}.Properties.RecordSets[]|\"dig +short \\(.Type)  \\(.Name) ${NS}  > $result_path/\\(.Name)route53\"' > $project_path/$target.route53.zone" >$project_path/test-$target-route53.sh
+echo "bundle exec bin/convert_zonefile -z $target.  -f $zone_path/$target.zone  | jq -r '.Resources.R53${domain}.Properties.RecordSets[]|\"dig +short \\(.Type)  \\(.Name) >> $result_path/\\(.Name)bind\"' > $project_path/$target.bind.zone" >$project_path/test-$target-bind.sh
+echo "bundle exec bin/convert_zonefile -z $target.  -f $zone_path/$target.zone  | jq -r '.Resources.R53${domain}.Properties.RecordSets[]|\"dig +short \\(.Type)  \\(.Name) ${NS}  >> $result_path/\\(.Name)route53\"' > $project_path/$target.route53.zone" >$project_path/test-$target-route53.sh
 
 
 sh $project_path/test-$target-bind.sh
