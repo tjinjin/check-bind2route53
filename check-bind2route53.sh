@@ -29,6 +29,7 @@ do
   fi
 done
 }
+
 echo "domain: $domain"
 
 if [ -z $target ] ;then
@@ -41,9 +42,12 @@ if [ -z $NS ] ;then
   exit 1
 fi
 
+# 冪等性のため
 if [ -e $project_path ] ;then
-  check
-  exit 1
+  rm -f $result_path/*
+  rmdir $result_path/
+  rm -f $project_path/*
+  rmdir $project_path
 fi
 
 mkdir -p $result_path
